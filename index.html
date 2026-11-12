@@ -1,15 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <title>OldNuNet</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+<link rel="stylesheet" href="https://cloudflare.com">
 <style>
-
 @font-face {
   font-family: 'Technology';
   src: url('./Technology-BoldItalic.ttf') format('truetype');
@@ -20,19 +15,10 @@
 
 @keyframes utoniumGlow {
   0% {
-    filter:
-      drop-shadow(0 0 2px #acff00)
-      drop-shadow(0 0 4px #80ff00)
-      drop-shadow(0 0 8px #00ff00)
-      drop-shadow(0 0 12px #008040);
+    filter: drop-shadow(0 0 2px #acff00) drop-shadow(0 0 4px #80ff00) drop-shadow(0 0 8px #00ff00) drop-shadow(0 0 12px #008040);
   }
-
   100% {
-    filter:
-      drop-shadow(0 0 5px #acff00)
-      drop-shadow(0 0 10px #80ff00)
-      drop-shadow(0 0 18px #00ff00)
-      drop-shadow(0 0 28px #008040);
+    filter: drop-shadow(0 0 5px #acff00) drop-shadow(0 0 10px #80ff00) drop-shadow(0 0 18px #00ff00) drop-shadow(0 0 28px #008040);
   }
 }
 
@@ -53,8 +39,7 @@
   display: block;
 }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   min-width: 1200px;
@@ -84,71 +69,12 @@ body {
   margin: 50px auto 0 auto;
 }
 
-#flash-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
 ruffle-player,
 ruffle-player canvas {
   width: 100%;
   height: 100%;
   display: block;
   background: transparent !important;
-}
-
-#layer1 {
-  position: absolute;
-  top: 0;
-  left: -320px;
-}
-
-#layer2 {
-  position: absolute;
-  top: 0;
-  right: -320px;
-}
-
-#layer2 img {
-  transform: scaleX(-1);
-}
-
-#layer5 {
-  position: absolute;
-  right: -260px;
-  top: 40px;
-  width: 239px;
-  color: #00FF00;
-  font-family: 'Bitsumishi', sans-serif;
-  font-size: large;
-}
-
-#layer4 {
-  position: absolute;
-  bottom: -45px;
-  right: -260px;
-}
-
-#layer3 {
-  position: absolute;
-  bottom: -70px;
-  right: -260px;
-}
-
-#layer3 img,
-#layer4 img {
-  display: block;
-  border: 0;
-}
-
-#layer7 {
-  position: absolute;
-  width: 88px;
-  height: 31px;
-  z-index: 0;
-  left: 10px;
-  bottom: 10px;
 }
 
 .auto-style2 {
@@ -161,12 +87,6 @@ ruffle-player canvas {
   border-width: 0px;
 }
 
-#layer10 {
-  position: absolute;
-  top: 0;
-  left: -320px;
-}
-
 #uraniumClock {
   font-family: 'Technology', monospace;
   font-size: 1.5rem;
@@ -176,21 +96,13 @@ ruffle-player canvas {
   white-space: nowrap;
 }
 
-#layer14 {
-  position: absolute;
-  top: 0;
-  left: -320px;
-}
-
 #webamp-anchor {
   position: absolute;
   width: 277px;
   height: 463px;
-  left: 740px;
-  top: 0px;
-  pointer-events: none;
-  z-index: 2147483647;
-  transform: translateZ(0);
+  left: 545px;
+  top: -52px;
+  z-index: 18;
 }
 
 #weed-layer {
@@ -223,29 +135,20 @@ ruffle-player canvas {
 }
 
 @keyframes weedFall {
-
   0% {
     opacity: 0;
-    transform:
-      translate3d(0, -120px, 0)
-      rotate(0deg);
+    transform: translate3d(0, -120px, 0) rotate(0deg);
   }
-
   10% {
     opacity: 1;
   }
-
   85% {
     opacity: 1;
   }
-
   100% {
     opacity: 0;
-    transform:
-      translate3d(var(--drift), 115vh, 0)
-      rotate(var(--rotation));
+    transform: translate3d(var(--drift), 115vh, 0) rotate(var(--rotation));
   }
-
 }
 
 .weed-leaf-ending {
@@ -253,682 +156,119 @@ ruffle-player canvas {
 }
 
 @keyframes weedFadeOut {
-
-  0% {
-    opacity: var(--fade-start-opacity);
-  }
-
-  100% {
-    opacity: 0;
-  }
-
+  0% { opacity: var(--fade-start-opacity); }
+  100% { opacity: 0; }
 }
-
 </style>
 
 <script>
-
 window.RufflePlayer = window.RufflePlayer || {};
-
 window.RufflePlayer.config = {
-  autoplay: true,
+  autoplay: "on",
+  unmuteOverlay: "hidden",
   backgroundColor: null,
   wmode: "transparent",
   openUrlMode: "sameTab"
 };
-
 </script>
-
-<script src="1delet1.dat/@ruffle-rs/ruffle"></script>
-
-<script>
-
-window.addEventListener("DOMContentLoaded", () => {
-
-  const ruffle = window.RufflePlayer.newest();
-  const container = document.getElementById("flash-container");
-  const player = ruffle.createPlayer();
-
-  container.appendChild(player);
-
-  player.load("usflash.swf");
-
-});
-
-</script>
-
+<script src="https://unpkg.com"></script>
 </head>
 
 <body>
-
 <div id="weed-layer"></div>
 
-<div
-  id="world"
-  style="
-    position: relative;
-    left: 0px;
-    top: 50px;
-    width: 1200px;
-    z-index: 1;
-  "
->
+<div id="world" style="position: relative; left: 0px; top: 50px; width: 1200px; z-index: 1;">
 
-<div
-  id="layer9"
-  style="
-    position: absolute;
-    width: 700px;
-    height: 96px;
-    z-index: 1;
-    left: 247px;
-    top: -96px
-  "
-  class="auto-style2"
->
-
-  <object
-    id="flash3"
-    data="gearui.swf"
-    style="width: 699px; height: 96px"
-    type="application/x-shockwave-flash"
-  >
-
-    <param name="movie" value="gearui.swf">
-    <param name="quality" value="High">
-
-  </object>
-
-</div>
-
-<div id="stage">
-
-	<div id="layer22" style="position: absolute; width: 209px; height: 136px; z-index: 102; left: -230px; top: 42px">
-		<img alt="" height="125" src="bubble.png" width="201"></div>
-
-<div
-  id="webamp-anchor"
-  style="
-    position: absolute;
-    left: 545px;
-    top: -52px;
-    z-index: 18
-  "
-></div>
-
-<div
-  id="layer18"
-  style="
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    z-index: 101;
-    left: 55px;
-    top: 399px"
->
-
-  <a
-    href="https://xf1re.com/profile/oldnunet"
-    target="_blank"
-  >
-
-    <img
-      src="https://xf1re.com/miniprofile/future/oldnunet"
-      style="border:0;"
-      alt="Xf1re Miniprofile"
-    >
-
-  </a>
-
-</div>
-
-<div
-  id="layer21"
-  style="
-    position: absolute;
-    width: 500px;
-    height: 33px;
-    z-index: 23;
-    left: 0px;
-    top: 0px
-  "
->
-</div>
-
-<div
-  id="layer13"
-  style="
-    position: absolute;
-    width: 102px;
-    height: 56px;
-    z-index: 20;
-    left: -136px;
-    top: 575px
-  "
->
-
-  <a href="https://ruffle.rs/">
-
-    <img
-      alt=""
-      class="auto-style3"
-      height="31"
-      src="rufflebadge.gif"
-      width="88"
-    >
-
-  </a>
-
-</div>
-
-<div
-  id="layer12"
-  style="
-    position: absolute;
-    width: 127px;
-    height: 56px;
-    z-index: 21;
-    left: -256px;
-    top: 570px
-  "
->
-
-  <div
-    id="donate-button-container"
-    style="
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      width:fit-content;
-      padding:5px 15px
-    "
-  >
-
-    <div
-      id="donate-button"
-      style="
-        width:88px;
-        height:31px
-      "
-    ></div>
-
-    <script
-      src="donate-sdk.js"
-      charset="UTF-8"
-    ></script>
-
-    <script>
-
-    PayPal.Donation.Button({
-
-      env:'production',
-
-      hosted_button_id:'E7FAMBUBG4VVG',
-
-      image: {
-        src:'paypalbtn.gif',
-        alt:'Donate with PayPal button',
-        title:'PayPal - The safer, easier way to pay online!'
-      }
-
-    }).render('#donate-button');
-
-    </script>
-
+  <div id="layer9" style="position: absolute; width: 700px; height: 96px; z-index: 1; left: 247px; top: -96px" class="auto-style2">
+    <object id="flash3" data="gearui.swf" style="width: 699px; height: 96px" type="application/x-shockwave-flash">
+      <param name="movie" value="gearui.swf">
+      <param name="quality" value="High">
+    </object>
   </div>
 
-</div>
-
-<div
-  id="layer10"
-  style="
-    position: absolute;
-    width: 170px;
-    height: 35px;
-    z-index: 19;
-    left: 1px;
-    top: -2px;
-    bottom: 367px
-  "
->
-
-  <div
-    style="
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:5px 15px;
-      width:fit-content
-    "
-  >
-
-    <div
-      id="uraniumClock"
-      class="uranium-pulse"
-    >
-      0:00:00
+  <div id="stage">
+    <div id="layer22" style="position: absolute; width: 209px; height: 136px; z-index: 102; left: -230px; top: 42px">
+      <img alt="" height="125" src="bubble.png" width="201">
     </div>
 
+    <div id="webamp-anchor"></div>
+
+    <div id="layer18" style="position: absolute; width: 100px; height: 100px; z-index: 101; left: 55px; top: 399px">
+      <a href="https://xf1re.com" target="_blank">
+        <img src="https://xf1re.com" style="border:0;" alt="Xf1re Miniprofile">
+      </a>
+    </div>
+
+    <div id="layer21" style="position: absolute; width: 500px; height: 33px; z-index: 23; left: 0px; top: 0px"></div>
+
+    <div id="layer13" style="position: absolute; width: 102px; height: 56px; z-index: 20; left: -136px; top: 575px">
+      <a href="https://ruffle.rs">
+        <img alt="" class="auto-style3" height="31" src="rufflebadge.gif" width="88">
+      </a>
+    </div>
+
+    <div id="layer12" style="position: absolute; width: 127px; height: 56px; z-index: 21; left: -256px; top: 570px">
+      <div id="donate-button-container" style="display:flex; justify-content:center; align-items:center; width:fit-content; padding:5px 15px">
+        <div id="donate-button" style="width:88px; height:31px"></div>
+        <script src="donate-sdk.js" charset="UTF-8"></script>
+        <script>
+        PayPal.Donation.Button({
+          env:'production',
+          hosted_button_id:'E7FAMBUBG4VVG',
+          image: {
+            src:'paypalbtn.gif',
+            alt:'Donate with PayPal button',
+            title:'PayPal - The safer, easier way to pay online!'
+          }
+        }).render('#donate-button');
+        </script>
+      </div>
+    </div>
+
+    <div id="layer10" style="position: absolute; width: 170px; height: 35px; z-index: 19; left: 1px; top: -2px; bottom: 367px">
+      <div style="display:flex; justify-content:center; align-items:center; padding:5px 15px; width:fit-content">
+        <div id="uraniumClock" class="uranium-pulse">0:00:00</div>
+      </div>
+    </div>
+
+    <div id="layer1" style="position: absolute; z-index: 22; left: -264px; top: -17px; width: 272px; height: 591px">
+      <img alt="" src="bubble2.png" height="600">
+    </div>
+
+    <object id="flash2" data="oldnunight.swf" style="width: 550px; height: 400px" type="application/x-shockwave-flash">
+      <param name="movie" value="oldnunight.swf">
+      <param name="quality" value="High">
+    </object>
   </div>
-
-</div>
-
-<div
-  id="layer1"
-  style="
-    position: absolute;
-    z-index: 22;
-    left: -264px;
-    top: -17px;
-    width: 272px;
-    height: 591px
-  "
->
-
-  <img
-    alt=""
-    src="bubble2.png"
-    height="600"
-  >
-
-</div>
-
-<object
-  id="flash2"
-  data="oldnunight.swf"
-  style="
-    width: 550px;
-    height: 400px
-  "
-  type="application/x-shockwave-flash"
->
-
-  <param
-    name="movie"
-    value="oldnunight.swf"
-  >
-
-  <param
-    name="quality"
-    value="High"
-  >
-
-</object>
-
-</div>
 
 </div>
 
 <script src="webamp.bundle.min.js"></script>
-
 <script>
+function tickClock() {
+  var d = new Date();
+  var h = d.getHours();
+  var m = d.getMinutes();
+  var s = d.getSeconds();
+  var ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12;
+  if (h === 0) h = 12;
+  if (m < 10) m = '0' + m;
+  if (s < 10) s = '0' + s;
+  document.getElementById('uraniumClock').textContent = h + ':' + m + ':' + s + ' ' + ampm;
+}
+setInterval(tickClock, 1000);
+tickClock();
 
-window.addEventListener("DOMContentLoaded", () => {
-
-  const webamp = new Webamp({
-
-    initialSkin: {
-      url: "./Cryostasis_T1.wsz"
-    },
-
-    initialTracks: [
-      {
-        metaData: {
-          artist: "DJ Mike Llama",
-          title: "Llama Whippin' Intro"
-        },
-
-        url: "https://cdn.jsdelivr.net/gh/captbaritone/webamp@43434d82cfe0e37286dbbe0666072dc3190a83bc/mp3/llama-2.91.mp3",
-
-        duration: 5.322286
-      }
-    ],
-
-    windowLayout: {
-
-      main: {
-        position: {
-          left: 0,
-          top: 0
-        },
-        closed: false
-      },
-
-      equalizer: {
-        position: {
-          left: 0,
-          top: 116
-        },
-        closed: false
-      },
-
-      playlist: {
-        position: {
-          left: 0,
-          top: 232
-        },
-        closed: false
-      }
-
-    },
-
-    zIndex: 2147483647
-
-  });
-
-  webamp.renderWhenReady(
-    document.getElementById("webamp-anchor")
-  );
-
+window.addEventListener("DOMContentLoaded", function() {
+  if (window.Webamp) {
+    var anchor = document.getElementById("webamp-anchor");
+    var webamp = new Webamp({
+      initialTracks: []
+    });
+    webamp.renderWhenReady(anchor);
+  }
 });
-
 </script>
-
-<script>
-
-const greenShades = [
-  "#003300",
-  "#004000",
-  "#005000",
-  "#006000",
-  "#007000",
-  "#008000",
-  "#009000",
-  "#00A000",
-  "#00B000",
-  "#00C000",
-  "#00D000",
-  "#00E000",
-  "#00F000",
-  "#00FF00",
-  "#20FF20",
-  "#33FF33",
-  "#44FF44",
-  "#55FF55",
-  "#66FF33",
-  "#80FF00"
-];
-
-let weedLeafTimer = null;
-let weedLeavesActive = false;
-let weedEnding = false;
-
-function createWeedLeaf() {
-
-  if (!weedLeavesActive) {
-    return;
-  }
-
-  const leaf = document.createElement("i");
-
-  leaf.className =
-    "fas fa-cannabis weed-leaf";
-
-  const size =
-    30 + Math.random() * 90;
-
-  const duration =
-    7 + Math.random() * 5;
-
-  const drift =
-    -250 + Math.random() * 500;
-
-  const rotation =
-    360 + Math.random() * 1080;
-
-  leaf.style.left =
-    Math.random() * 100 + "vw";
-
-  leaf.style.fontSize =
-    size + "px";
-
-  const shade =
-    greenShades[
-      Math.floor(
-        Math.random() * greenShades.length
-      )
-    ];
-
-  leaf.style.color =
-    shade;
-
-  leaf.style.setProperty(
-    "--drift",
-    drift + "px"
-  );
-
-  leaf.style.setProperty(
-    "--rotation",
-    rotation + "deg"
-  );
-
-  leaf.style.animationDuration =
-    duration + "s";
-
-  document
-    .getElementById("weed-layer")
-    .appendChild(leaf);
-
-  setTimeout(function() {
-
-    if (leaf.parentNode) {
-      leaf.remove();
-    }
-
-  }, (duration + 1) * 1000);
-
-}
-
-function startWeedLeaves() {
-
-  if (weedLeavesActive) {
-    return;
-  }
-
-  weedLeavesActive = true;
-  weedEnding = false;
-
-  for (let i = 0; i < 45; i++) {
-
-    setTimeout(function() {
-
-      if (weedLeavesActive) {
-        createWeedLeaf();
-      }
-
-    }, i * 70);
-
-  }
-
-  weedLeafTimer =
-    setInterval(function() {
-
-      if (weedLeavesActive) {
-        createWeedLeaf();
-      }
-
-    }, 100);
-
-}
-
-function fadeOutWeedLeaves() {
-
-  if (!weedLeavesActive) {
-    return;
-  }
-
-  weedLeavesActive = false;
-  weedEnding = true;
-
-  if (weedLeafTimer !== null) {
-
-    clearInterval(weedLeafTimer);
-    weedLeafTimer = null;
-
-  }
-
-  setTimeout(function() {
-    weedEnding = false;
-  }, 1100);
-
-}
-
-function stopWeedLeaves() {
-
-  fadeOutWeedLeaves();
-
-}
-
-function is420Time() {
-
-  const now = new Date();
-
-  const timeZone =
-    Intl.DateTimeFormat()
-      .resolvedOptions()
-      .timeZone || "";
-
-  const europeanTimeZone =
-    timeZone.startsWith("Europe/");
-
-  const hour =
-    now.getHours();
-
-  return (
-    now.getMinutes() === 20 &&
-    (
-      hour === 4 ||
-      hour ===
-      (europeanTimeZone ? 14 : 16)
-    )
-  );
-
-}
-
-function updateWeedLeaves() {
-
-  if (is420Time()) {
-    startWeedLeaves();
-  } else {
-    stopWeedLeaves();
-  }
-
-}
-
-function updateClock() {
-
-  const now = new Date();
-
-  const clockEl =
-    document.getElementById(
-      "uraniumClock"
-    );
-
-  const timeZone =
-    Intl.DateTimeFormat()
-      .resolvedOptions()
-      .timeZone || "";
-
-  const europeanTimeZone =
-    timeZone.startsWith("Europe/");
-
-  if (europeanTimeZone) {
-
-    clockEl.textContent =
-      now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-      });
-
-  } else {
-
-    clockEl.textContent =
-      now.toLocaleTimeString([], {
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-      });
-
-  }
-
-  const rastaTime =
-    now.getMinutes() === 20 &&
-    (
-      now.getHours() === 4 ||
-      now.getHours() ===
-      (europeanTimeZone ? 14 : 16)
-    );
-
-  if (rastaTime) {
-
-    clockEl.style.backgroundImage =
-      "linear-gradient(to bottom, #FF0000 0%, #FF0000 38%, #FFFF00 38%, #FFFF00 68%, #00FF00 68%, #00FF00 100%)";
-
-    clockEl.style.webkitBackgroundClip =
-      "text";
-
-    clockEl.style.webkitTextFillColor =
-      "transparent";
-
-    clockEl.style.backgroundClip =
-      "text";
-
-    clockEl.style.paddingTop =
-      "0.1em";
-
-    clockEl.style.lineHeight =
-      "1";
-
-    clockEl.style.display =
-      "inline-block";
-
-  } else {
-
-    clockEl.style.backgroundImage =
-      "none";
-
-    clockEl.style.webkitBackgroundClip =
-      "initial";
-
-    clockEl.style.webkitTextFillColor =
-      "";
-
-    clockEl.style.backgroundClip =
-      "initial";
-
-    clockEl.style.color =
-      "#000000";
-
-    clockEl.style.paddingTop =
-      "initial";
-
-    clockEl.style.lineHeight =
-      "initial";
-
-    clockEl.style.display =
-      "block";
-
-  }
-
-}
-
-updateClock();
-updateWeedLeaves();
-
-setInterval(
-  updateClock,
-  250
-);
-
-setInterval(
-  updateWeedLeaves,
-  250
-);
-
-</script>
-
 </body>
 </html>
