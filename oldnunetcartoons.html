@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Transparent SWF with Ruffle</title>
+
+<script>
+window.RufflePlayer = window.RufflePlayer || {};
+window.RufflePlayer.config = {
+  autoplay: true,
+  backgroundColor: null,
+  wmode: "transparent",
+  openUrlMode: "sameTab"
+};
+</script>
+
+<script src="1delet1.dat/@ruffle-rs/ruffle"></script>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  min-width: 1200px;
+  overflow-x: auto;
+  height: 100%;
+}
+
+body {
+  background: red;
+  background-image: url('greenbackgrounddither.png');
+  background-repeat: repeat;
+  background-size: cover;
+  background-attachment: scroll;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+#world {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#stage {
+  position: relative;
+  width: 550px;
+  height: 400px;
+  margin: 50px auto 0 auto;
+}
+
+#flash-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+ruffle-player,
+ruffle-player canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent !important;
+}
+
+#layer1 {
+  position: absolute;
+  top: 0;
+  left: -320px;
+}
+
+#layer2 {
+  position: absolute;
+  top: 0;
+  right: -320px;
+}
+
+#layer2 img {
+  transform: scaleX(-1);
+}
+
+#layer5 {
+  position: absolute;
+  right: -260px;
+  top: 40px;
+  width: 239px;
+  color: #00FF00;
+  font-family: 'Bitsumishi', sans-serif;
+  font-size: large;
+}
+
+#layer4 {
+  position: absolute;
+  bottom: -45px;
+  right: -260px;
+}
+
+#layer3 {
+  position: absolute;
+  bottom: -70px;
+  right: -260px;
+}
+
+#layer3 img,
+#layer4 img {
+  display: block;
+  border: 0;
+}
+
+#layer7 {
+  position: absolute;
+  width: 88px;
+  height: 31px;
+  z-index: 0;
+  left: 10px;
+  bottom: 10px;
+}
+
+.auto-style2 {
+  padding-bottom: 0px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+#layer10 {
+  position: absolute;
+  width: 88px;
+  height: 31px;
+  z-index: 0;
+  left: 10px;
+  bottom: 10px;
+}
+
+#layer19 img,
+#layer20 img {
+  animation: utoniumGlow 1s ease-in-out infinite alternate;
+  display: block;
+}
+
+#layer11 img {
+  animation: utoniumGlow 1s ease-in-out infinite alternate;
+  display: block;
+}
+
+#layer14 {
+  animation: utoniumTextGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes utoniumGlow {
+  0% {
+    filter:
+      drop-shadow(0 0 2px #acff00)
+      drop-shadow(0 0 4px #80ff00)
+      drop-shadow(0 0 8px #00ff00)
+      drop-shadow(0 0 12px #008040);
+  }
+
+  100% {
+    filter:
+      drop-shadow(0 0 5px #acff00)
+      drop-shadow(0 0 10px #80ff00)
+      drop-shadow(0 0 18px #00ff00)
+      drop-shadow(0 0 28px #008040);
+  }
+}
+
+@keyframes utoniumTextGlow {
+  0% {
+    text-shadow:
+      0 0 2px #acff00,
+      0 0 4px #80ff00,
+      0 0 8px #00ff00,
+      0 0 12px #008040;
+  }
+
+  100% {
+    text-shadow:
+      0 0 5px #acff00,
+      0 0 10px #80ff00,
+      0 0 18px #00ff00,
+      0 0 28px #008040;
+  }
+}
+
+.auto-style3 {
+  border-width: 0px;
+}
+
+.auto-style4 {
+  font-size: xx-small;
+}
+
+.auto-style5 {
+  font-size: x-small;
+  font-weight: bold;
+}
+</style>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const ruffle = window.RufflePlayer.newest();
+  const container = document.getElementById("flash-container");
+  const player = ruffle.createPlayer();
+
+  container.appendChild(player);
+  player.load("usflash.swf");
+});
+</script>
+
+</head>
+
+<body>
+
+<div id="world" style="left: 0px; top: 50px">
+
+  <div id="layer9" style="position: absolute; width: 700px; height: 96px; z-index: 1; left: 247px; top: -96px" class="auto-style2">
+    <object id="flash3" data="gearuistatic.swf" style="width: 699px; height: 96px" type="application/x-shockwave-flash">
+      <param name="movie" value="gearuistatic.swf">
+      <param name="quality" value="High">
+    </object>
+  </div>
+
+  <div id="stage">
+
+    <div id="layer11" style="position: absolute; width: 103px; height: 95px; z-index: 9; left: 21px; top: 42px">
+      <a href="stickparty.html">
+        <img alt="" height="156" src="stickpartylogo.png" width="277" class="auto-style3">
+      </a>
+    </div>
+
+    <div id="layer14" style="position: absolute; width: 210px; height: 107px; z-index: 10; left: 299px; top: 67px; text-align: center; font-family: 'Visitor TT1 BRK'; color: #000000; -webkit-text-stroke: 0.3px #008040;" class="auto-style4">
+      <span class="auto-style5">A coming-of-age story about friendship, growing up, and the experiences that
+      shape us along the way. A simple story about finding your place, learning
+      About yourself, and looking toward what comes next.</span>
+    </div>
+
+    <div id="layer1" style="z-index: 5; left: -264px; top: -17px; width: 272px; height: 591px;">
+      <img alt="" src="bubble2.png" height="600">
+    </div>
+
+    <div id="layer10" style="position: absolute; width: 552px; height: 672px; z-index: 6; left: -4px; bottom: -261px">
+
+      <div id="layer21" style="position: absolute; width: 100px; height: 100px; z-index: 2; left: 292px; top: 64px">
+        <img alt="" height="84" src="bubble.png" width="229">
+      </div>
+
+      <div id="layer12" style="position: absolute; width: 100px; height: 100px; z-index: 2; left: 42px; top: 64px">
+        <img alt="" height="139" src="bubble.png" width="229">
+      </div>
+
+      <img alt="" height="679" src="bigwindow.png" width="553">
+
+    </div>
+
+    <div id="layer20" style="position: absolute; width: 102px; height: 56px; z-index: 7; left: -136px; top: 575px">
+      <a href="https://ruffle.rs/">
+        <img alt="" class="auto-style3" height="31" src="rufflebadge.gif" width="88">
+      </a>
+    </div>
+
+    <div id="layer19" style="position: absolute; width: 127px; height: 56px; z-index: 8; left: -256px; top: 570px">
+      <div id="donate-button-container" style="display:flex; justify-content:center; align-items:center; width:fit-content; padding:5px 15px;">
+        <div id="donate-button" style="width:88px; height:31px"></div>
+
+        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+
+        <script>
+        PayPal.Donation.Button({
+          env:'production',
+          hosted_button_id:'E7FAMBUBG4VVG',
+          image: {
+            src:'paypalbtn.gif',
+            alt:'Donate with PayPal button',
+            title:'PayPal - The safer, easier way to pay online!'
+          }
+        }).render('#donate-button');
+        </script>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
