@@ -290,25 +290,6 @@ window.RufflePlayer.config = {
 
 <script>
 
-const flashPlayers = [];
-
-function setFlashVolume(player) {
-  try {
-    player.ruffle().volume = 1;
-  } catch (error) {
-    player.volume = 1;
-  }
-}
-
-function enableFlashSound() {
-  for (const player of flashPlayers) {
-    setFlashVolume(player);
-  }
-}
-
-document.addEventListener("pointerdown", enableFlashSound, true);
-document.addEventListener("keydown", enableFlashSound, true);
-
 window.addEventListener("DOMContentLoaded", async () => {
 
   const ruffle = window.RufflePlayer.newest();
@@ -341,15 +322,12 @@ window.addEventListener("DOMContentLoaded", async () => {
     player.style.background = "transparent";
 
     object.replaceWith(player);
-    flashPlayers.push(player);
 
     await player.load({
       url: swf,
       autoplay: "on",
       unmuteOverlay: "hidden"
     });
-
-    setFlashVolume(player);
 
   }
 
@@ -364,15 +342,12 @@ window.addEventListener("DOMContentLoaded", async () => {
     player.style.display = "block";
 
     container.appendChild(player);
-    flashPlayers.push(player);
 
     await player.load({
       url: "usflash.swf",
       autoplay: "on",
       unmuteOverlay: "hidden"
     });
-
-    setFlashVolume(player);
 
   }
 
@@ -638,6 +613,28 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 </div>
 
+
+<script>
+
+function startAllMedia() {
+  document.querySelectorAll("audio, video").forEach((media) => {
+    media.autoplay = true;
+    media.setAttribute("autoplay", "");
+    media.play().catch(() => {});
+  });
+}
+
+document.addEventListener("DOMContentLoaded", startAllMedia);
+window.addEventListener("load", startAllMedia);
+
+document.addEventListener("loadedmetadata", (event) => {
+  if (event.target.matches && event.target.matches("audio, video")) {
+    event.target.play().catch(() => {});
+  }
+}, true);
+
+</script>
+
 <script src="webamp.bundle.min.js"></script>
 
 <script>
@@ -697,7 +694,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   webamp.renderWhenReady(
     document.getElementById("webamp-anchor")
-  );
+  ).then(() => {
+    webamp.play();
+  });
 
 });
 
