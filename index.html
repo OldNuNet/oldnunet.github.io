@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -278,7 +279,6 @@ window.RufflePlayer = window.RufflePlayer || {};
 
 window.RufflePlayer.config = {
   autoplay: "on",
-  unmuteOverlay: "hidden",
   backgroundColor: null,
   wmode: "transparent",
   openUrlMode: "sameTab"
@@ -325,8 +325,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await player.load({
       url: swf,
-      autoplay: "on",
-      unmuteOverlay: "hidden"
+      autoplay: "on"
     });
 
   }
@@ -345,8 +344,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await player.load({
       url: "usflash.swf",
-      autoplay: "on",
-      unmuteOverlay: "hidden"
+      autoplay: "on"
     });
 
   }
@@ -613,28 +611,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 </div>
 
-
-<script>
-
-function startAllMedia() {
-  document.querySelectorAll("audio, video").forEach((media) => {
-    media.autoplay = true;
-    media.setAttribute("autoplay", "");
-    media.play().catch(() => {});
-  });
-}
-
-document.addEventListener("DOMContentLoaded", startAllMedia);
-window.addEventListener("load", startAllMedia);
-
-document.addEventListener("loadedmetadata", (event) => {
-  if (event.target.matches && event.target.matches("audio, video")) {
-    event.target.play().catch(() => {});
-  }
-}, true);
-
-</script>
-
 <script src="webamp.bundle.min.js"></script>
 
 <script>
@@ -694,9 +670,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   webamp.renderWhenReady(
     document.getElementById("webamp-anchor")
-  ).then(() => {
-    webamp.play();
-  });
+  );
 
 });
 
