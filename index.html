@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -279,6 +278,7 @@ window.RufflePlayer = window.RufflePlayer || {};
 
 window.RufflePlayer.config = {
   autoplay: "on",
+  unmuteOverlay: "hidden",
   backgroundColor: null,
   wmode: "transparent",
   openUrlMode: "sameTab"
@@ -297,6 +297,8 @@ window.addEventListener("DOMContentLoaded", async () => {
   const swfObjects = document.querySelectorAll(
     'object[type="application/x-shockwave-flash"], object[data$=".swf"]'
   );
+
+  const players = [];
 
   for (const object of swfObjects) {
 
@@ -322,10 +324,12 @@ window.addEventListener("DOMContentLoaded", async () => {
     player.style.background = "transparent";
 
     object.replaceWith(player);
+    players.push(player);
 
-    await player.load({
+    player.load({
       url: swf,
-      autoplay: "on"
+      autoplay: "on",
+      unmuteOverlay: "hidden"
     });
 
   }
@@ -339,12 +343,15 @@ window.addEventListener("DOMContentLoaded", async () => {
     player.style.width = "100%";
     player.style.height = "100%";
     player.style.display = "block";
+    player.style.background = "transparent";
 
     container.appendChild(player);
+    players.push(player);
 
-    await player.load({
-      url: "usflash.swf",
-      autoplay: "on"
+    player.load({
+      url: "oldnunight.swf",
+      autoplay: "on",
+      unmuteOverlay: "hidden"
     });
 
   }
@@ -611,6 +618,21 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 </div>
 
+<script>
+
+function autoplayMedia() {
+  document.querySelectorAll("audio, video").forEach((media) => {
+    media.autoplay = true;
+    media.setAttribute("autoplay", "");
+    media.play().catch(() => {});
+  });
+}
+
+document.addEventListener("DOMContentLoaded", autoplayMedia);
+window.addEventListener("load", autoplayMedia);
+
+</script>
+
 <script src="webamp.bundle.min.js"></script>
 
 <script>
@@ -670,7 +692,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   webamp.renderWhenReady(
     document.getElementById("webamp-anchor")
-  );
+  ).then(() => {
+    webamp.play();
+  });
 
 });
 
