@@ -278,6 +278,7 @@ window.RufflePlayer = window.RufflePlayer || {};
 
 window.RufflePlayer.config = {
   autoplay: "on",
+  unmuteOverlay: "hidden",
   backgroundColor: null,
   wmode: "transparent",
   openUrlMode: "sameTab"
@@ -324,7 +325,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await player.load({
       url: swf,
-      autoplay: "on"
+      autoplay: "on",
+      unmuteOverlay: "hidden"
     });
 
   }
@@ -343,7 +345,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await player.load({
       url: "usflash.swf",
-      autoplay: "on"
+      autoplay: "on",
+      unmuteOverlay: "hidden"
     });
 
   }
