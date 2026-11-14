@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -289,85 +290,62 @@ window.RufflePlayer.config = {
 
 <script>
 
-window.addEventListener("DOMContentLoaded", async function() {
+window.addEventListener("DOMContentLoaded", async () => {
 
-  if (
-    !window.RufflePlayer ||
-    typeof window.RufflePlayer.newest !== "function"
-  ) {
-    console.error("Ruffle did not load. Check the Ruffle script path.");
-    return;
+  const ruffle = window.RufflePlayer.newest();
+
+  const swfObjects = document.querySelectorAll(
+    'object[type="application/x-shockwave-flash"], object[data$=".swf"]'
+  );
+
+  for (const object of swfObjects) {
+
+    const swf =
+      object.getAttribute("data") ||
+      object.querySelector('param[name="movie"]')?.value;
+
+    if (!swf) continue;
+
+    const player = ruffle.createPlayer();
+
+    player.style.width =
+      object.style.width ||
+      object.getAttribute("width") ||
+      "100%";
+
+    player.style.height =
+      object.style.height ||
+      object.getAttribute("height") ||
+      "100%";
+
+    player.style.display = "block";
+    player.style.background = "transparent";
+
+    object.replaceWith(player);
+
+    await player.load({
+      url: swf,
+      autoplay: "on"
+    });
+
   }
 
-  try {
+  const container = document.getElementById("flash-container");
 
-    const ruffle = window.RufflePlayer.newest();
+  if (container) {
 
-    const swfObjects = document.querySelectorAll(
-      'object[type="application/x-shockwave-flash"], object[data$=".swf"]'
-    );
+    const player = ruffle.createPlayer();
 
-    for (const object of swfObjects) {
+    player.style.width = "100%";
+    player.style.height = "100%";
+    player.style.display = "block";
 
-      const swf =
-        object.getAttribute("data") ||
-        object.querySelector('param[name="movie"]')?.value;
+    container.appendChild(player);
 
-      if (!swf) continue;
-
-      const player = ruffle.createPlayer();
-
-      player.style.width =
-        object.style.width ||
-        object.getAttribute("width") ||
-        "100%";
-
-      player.style.height =
-        object.style.height ||
-        object.getAttribute("height") ||
-        "100%";
-
-      player.style.display = "block";
-      player.style.background = "transparent";
-
-      object.replaceWith(player);
-
-      try {
-        await player.load({
-          url: new URL(swf, document.baseURI).href
-        });
-      } catch (error) {
-        console.error("Failed to load " + swf, error);
-      }
-
-    }
-
-    const container = document.getElementById("flash-container");
-
-    if (container) {
-
-      const player = ruffle.createPlayer();
-
-      player.style.width = "100%";
-      player.style.height = "100%";
-      player.style.display = "block";
-      player.style.background = "transparent";
-
-      container.appendChild(player);
-
-      try {
-        await player.load({
-          url: new URL("oldnunight.swf", document.baseURI).href
-        });
-      } catch (error) {
-        console.error("Failed to load oldnunight.swf", error);
-      }
-
-    }
-
-  } catch (error) {
-
-    console.error("Ruffle initialization failed:", error);
+    await player.load({
+      url: "usflash.swf",
+      autoplay: "on"
+    });
 
   }
 
@@ -421,11 +399,7 @@ window.addEventListener("DOMContentLoaded", async function() {
 
 <div id="stage">
 
-<div id="layer24" class="auto-style4" style="position: absolute; width: 213px; height: 43px; z-index: 104; left: 155px; top: 5px">
-  If you can read this,<br>Bravo. You can read just fine...
-</div>
-
-  <div id="layer23" style="position: absolute; width: 465px; height: 35px; z-index: 103; left: 42px; top: 514px">
+  <div id="layer23" style="position: absolute; width: 465px; height: 35px; z-index: 103; left: 45px; top: 515px">
     <img alt="" height="28" src="underconstruction2.gif" width="459">
   </div>
 
