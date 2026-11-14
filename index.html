@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OldNuNet</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -278,10 +279,10 @@ window.RufflePlayer = window.RufflePlayer || {};
 
 window.RufflePlayer.config = {
   autoplay: "on",
-  unmuteOverlay: "hidden",
   backgroundColor: null,
   wmode: "transparent",
-  openUrlMode: "sameTab"
+  openUrlMode: "sameTab",
+  scale: "showAll"
 };
 
 </script>
@@ -293,17 +294,59 @@ window.RufflePlayer.config = {
 window.addEventListener("DOMContentLoaded", async function() {
 
   if (!window.RufflePlayer || !window.RufflePlayer.newest) {
+    console.error("Ruffle failed to initialize. Check the Ruffle script path.");
     return;
   }
 
   const ruffle = window.RufflePlayer.newest();
 
-  async function startFlashPlayer(container, file, width, height) {
+  const swfObjects = document.querySelectorAll(
+    'object[type="application/x-shockwave-flash"], object[data$=".swf"]'
+  );
+
+  for (const object of swfObjects) {
+
+    const swf =
+      object.getAttribute("data") ||
+      object.querySelector('param[name="movie"]')?.value;
+
+    if (!swf) continue;
 
     const player = ruffle.createPlayer();
 
-    player.style.width = width;
-    player.style.height = height;
+    player.style.width =
+      object.style.width ||
+      object.getAttribute("width") ||
+      "100%";
+
+    player.style.height =
+      object.style.height ||
+      object.getAttribute("height") ||
+      "100%";
+
+    player.style.display = "block";
+    player.style.background = "transparent";
+
+    object.replaceWith(player);
+
+    try {
+      await player.load({
+        url: swf
+      });
+    } catch (error) {
+      console.error("Could not load " + swf, error);
+    }
+
+  }
+
+  const container = document.getElementById("flash-container");
+
+  if (container) {
+
+    const player = ruffle.createPlayer();
+
+    player.style.width = "100%";
+    player.style.height = "100%";
     player.style.display = "block";
     player.style.background = "transparent";
 
@@ -311,67 +354,11 @@ window.addEventListener("DOMContentLoaded", async function() {
 
     try {
       await player.load({
-        url: file,
-        autoplay: "on"
+        url: "oldnunight.swf"
       });
     } catch (error) {
-      console.error("Unable to load Flash file:", file, error);
+      console.error("Could not load oldnunight.swf", error);
     }
-
-    return player;
-  }
-
-  const flashObjects = Array.from(
-    document.querySelectorAll(
-      'object[type="application/x-shockwave-flash"], object[data$=".swf"]'
-    )
-  );
-
-  for (const object of flashObjects) {
-
-    const file =
-      object.getAttribute("data") ||
-      object.querySelector('param[name="movie"]')?.value;
-
-    if (!file) continue;
-
-    const width =
-      object.style.width ||
-      object.getAttribute("width") ||
-      "100%";
-
-    const height =
-      object.style.height ||
-      object.getAttribute("height") ||
-      "100%";
-
-    const container = document.createElement("div");
-
-    container.style.width = width;
-    container.style.height = height;
-    container.style.display = "block";
-
-    object.replaceWith(container);
-
-    await startFlashPlayer(
-      container,
-      file,
-      width,
-      height
-    );
-  }
-
-  const mainContainer =
-    document.getElementById("flash-container");
-
-  if (mainContainer) {
-
-    await startFlashPlayer(
-      mainContainer,
-      "oldnunight.swf",
-      "100%",
-      "100%"
-    );
 
   }
 
