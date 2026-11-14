@@ -1,4 +1,3 @@
-﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -183,6 +182,18 @@ ruffle-player canvas {
   left: -320px;
 }
 
+#layer24 {
+  opacity: 0;
+  animation: revealMessage 0.8s ease forwards;
+  animation-delay: 2s;
+}
+
+@keyframes revealMessage {
+  to {
+    opacity: 1;
+  }
+}
+
 #webamp-anchor {
   position: absolute;
   width: 277px;
@@ -272,8 +283,8 @@ ruffle-player canvas {
 }
 
 .auto-style5 {
-	color: #000000;
-	background-color: #CBFF00;
+  color: #000000;
+  background-color: #CBFF00;
 }
 
 </style>
@@ -296,6 +307,11 @@ window.RufflePlayer.config = {
 <script>
 
 window.addEventListener("DOMContentLoaded", async () => {
+
+  if (!window.RufflePlayer || !window.RufflePlayer.newest) {
+    console.error("Ruffle failed to initialize.");
+    return;
+  }
 
   const ruffle = window.RufflePlayer.newest();
 
@@ -328,10 +344,13 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     object.replaceWith(player);
 
-    await player.load({
-      url: swf,
-      autoplay: "on"
-    });
+    try {
+      await player.load({
+        url: new URL(swf, document.baseURI).href
+      });
+    } catch (error) {
+      console.error("Failed to load Flash file:", swf, error);
+    }
 
   }
 
@@ -344,13 +363,17 @@ window.addEventListener("DOMContentLoaded", async () => {
     player.style.width = "100%";
     player.style.height = "100%";
     player.style.display = "block";
+    player.style.background = "transparent";
 
     container.appendChild(player);
 
-    await player.load({
-      url: "usflash.swf",
-      autoplay: "on"
-    });
+    try {
+      await player.load({
+        url: new URL("oldnunight.swf", document.baseURI).href
+      });
+    } catch (error) {
+      console.error("Failed to load oldnunight.swf:", error);
+    }
 
   }
 
@@ -406,7 +429,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 <div id="layer24" class="auto-style4" style="position: absolute; width: 167px; height: 42px; z-index: 0; left: 194px; top: 27px">
   If you can read this,<br>You're <span class="auto-style5">REAL</span> 
-	sneaky...</div>
+  sneaky...</div>
 
   <div id="layer23" style="position: absolute; width: 465px; height: 35px; z-index: 103; left: 45px; top: 515px">
     <img alt="" height="28" src="underconstruction2.gif" width="459">
