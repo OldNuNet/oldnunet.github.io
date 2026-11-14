@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -290,62 +289,85 @@ window.RufflePlayer.config = {
 
 <script>
 
-window.addEventListener("DOMContentLoaded", async () => {
+window.addEventListener("DOMContentLoaded", async function() {
 
-  const ruffle = window.RufflePlayer.newest();
-
-  const swfObjects = document.querySelectorAll(
-    'object[type="application/x-shockwave-flash"], object[data$=".swf"]'
-  );
-
-  for (const object of swfObjects) {
-
-    const swf =
-      object.getAttribute("data") ||
-      object.querySelector('param[name="movie"]')?.value;
-
-    if (!swf) continue;
-
-    const player = ruffle.createPlayer();
-
-    player.style.width =
-      object.style.width ||
-      object.getAttribute("width") ||
-      "100%";
-
-    player.style.height =
-      object.style.height ||
-      object.getAttribute("height") ||
-      "100%";
-
-    player.style.display = "block";
-    player.style.background = "transparent";
-
-    object.replaceWith(player);
-
-    await player.load({
-      url: swf,
-      autoplay: "on"
-    });
-
+  if (
+    !window.RufflePlayer ||
+    typeof window.RufflePlayer.newest !== "function"
+  ) {
+    console.error("Ruffle did not load. Check the Ruffle script path.");
+    return;
   }
 
-  const container = document.getElementById("flash-container");
+  try {
 
-  if (container) {
+    const ruffle = window.RufflePlayer.newest();
 
-    const player = ruffle.createPlayer();
+    const swfObjects = document.querySelectorAll(
+      'object[type="application/x-shockwave-flash"], object[data$=".swf"]'
+    );
 
-    player.style.width = "100%";
-    player.style.height = "100%";
-    player.style.display = "block";
+    for (const object of swfObjects) {
 
-    container.appendChild(player);
+      const swf =
+        object.getAttribute("data") ||
+        object.querySelector('param[name="movie"]')?.value;
 
-    await player.load({
-      url: "usflash.swf",
-      autoplay: "on"
-    });
+      if (!swf) continue;
+
+      const player = ruffle.createPlayer();
+
+      player.style.width =
+        object.style.width ||
+        object.getAttribute("width") ||
+        "100%";
+
+      player.style.height =
+        object.style.height ||
+        object.getAttribute("height") ||
+        "100%";
+
+      player.style.display = "block";
+      player.style.background = "transparent";
+
+      object.replaceWith(player);
+
+      try {
+        await player.load({
+          url: new URL(swf, document.baseURI).href
+        });
+      } catch (error) {
+        console.error("Failed to load " + swf, error);
+      }
+
+    }
+
+    const container = document.getElementById("flash-container");
+
+    if (container) {
+
+      const player = ruffle.createPlayer();
+
+      player.style.width = "100%";
+      player.style.height = "100%";
+      player.style.display = "block";
+      player.style.background = "transparent";
+
+      container.appendChild(player);
+
+      try {
+        await player.load({
+          url: new URL("oldnunight.swf", document.baseURI).href
+        });
+      } catch (error) {
+        console.error("Failed to load oldnunight.swf", error);
+      }
+
+    }
+
+  } catch (error) {
+
+    console.error("Ruffle initialization failed:", error);
 
   }
 
