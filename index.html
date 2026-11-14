@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OldNuNet</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -281,8 +281,7 @@ window.RufflePlayer.config = {
   autoplay: "on",
   backgroundColor: null,
   wmode: "transparent",
-  openUrlMode: "sameTab",
-  scale: "showAll"
+  openUrlMode: "sameTab"
 };
 
 </script>
@@ -291,12 +290,7 @@ window.RufflePlayer.config = {
 
 <script>
 
-window.addEventListener("DOMContentLoaded", async function() {
-
-  if (!window.RufflePlayer || !window.RufflePlayer.newest) {
-    console.error("Ruffle failed to initialize. Check the Ruffle script path.");
-    return;
-  }
+window.addEventListener("DOMContentLoaded", async () => {
 
   const ruffle = window.RufflePlayer.newest();
 
@@ -329,13 +323,10 @@ window.addEventListener("DOMContentLoaded", async function() {
 
     object.replaceWith(player);
 
-    try {
-      await player.load({
-        url: swf
-      });
-    } catch (error) {
-      console.error("Could not load " + swf, error);
-    }
+    await player.load({
+      url: swf,
+      autoplay: "on"
+    });
 
   }
 
@@ -348,17 +339,13 @@ window.addEventListener("DOMContentLoaded", async function() {
     player.style.width = "100%";
     player.style.height = "100%";
     player.style.display = "block";
-    player.style.background = "transparent";
 
     container.appendChild(player);
 
-    try {
-      await player.load({
-        url: "oldnunight.swf"
-      });
-    } catch (error) {
-      console.error("Could not load oldnunight.swf", error);
-    }
+    await player.load({
+      url: "usflash.swf",
+      autoplay: "on"
+    });
 
   }
 
@@ -416,7 +403,7 @@ window.addEventListener("DOMContentLoaded", async function() {
   If you can read this,<br>Bravo. You can read just fine...
 </div>
 
-  <div id="layer23" style="position: absolute; width: 465px; height: 35px; z-index: 103; left: 45px; top: 542px">
+  <div id="layer23" style="position: absolute; width: 465px; height: 35px; z-index: 103; left: 42px; top: 514px">
     <img alt="" height="28" src="underconstruction2.gif" width="459">
   </div>
 
