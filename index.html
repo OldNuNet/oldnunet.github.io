@@ -58,10 +58,10 @@ html,
 body {
   margin: 0;
   padding: 0;
-  min-width: 0;
   width: 100%;
-  overflow-x: hidden;
+  min-width: 0;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -275,22 +275,6 @@ ruffle-player canvas {
   text-align: center;
 }
 
-@media screen and (max-width: 1200px) {
-  body {
-    overflow-x: hidden;
-  }
-
-  #world {
-    transform-origin: top center;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .weed-leaf {
-    animation-duration: 0.01ms !important;
-  }
-}
-
 </style>
 
 <script>
@@ -299,11 +283,11 @@ window.RufflePlayer = window.RufflePlayer || {};
 
 window.RufflePlayer.config = {
   autoplay: "on",
+  unmuteOverlay: "hidden",
   backgroundColor: null,
   wmode: "transparent",
   openUrlMode: "sameTab",
-  unmuteOverlay: "hidden",
-  letterbox: "on",
+  splashScreen: false,
   warnOnUnsupportedContent: false
 };
 
@@ -315,63 +299,118 @@ window.RufflePlayer.config = {
 
 window.addEventListener("DOMContentLoaded", async () => {
 
-  const ruffle = window.RufflePlayer && window.RufflePlayer.newest();
+  const ruffle = window.RufflePlayer.newest();
 
-  if (!ruffle) return;
+  const players = [];
 
-  const loadFlash = async (container, file, width, height) => {
+  async function loadFlash(container, file, width, height) {
+
     const player = ruffle.createPlayer();
+
     player.style.width = width;
     player.style.height = height;
     player.style.display = "block";
     player.style.background = "transparent";
+
     container.replaceWith(player);
 
+    players.push(player);
+
     try {
-      await player.load({
+
+      await player.ruffle().load({
         url: new URL(file, document.baseURI).href,
-        autoplay: "on"
+        autoplay: "on",
+        unmuteOverlay: "hidden",
+        backgroundColor: null
       });
+
+      player.ruffle().volume = 1;
+
     } catch (error) {
-      console.error("Ruffle could not load " + file, error);
+
+      console.error("Ruffle failed to load:", file, error);
+
     }
 
     return player;
-  };
 
-  const flashObjects = Array.from(document.querySelectorAll(
+  }
+
+  const swfObjects = document.querySelectorAll(
     'object[type="application/x-shockwave-flash"], object[data$=".swf"]'
-  ));
+  );
 
-  for (const object of flashObjects) {
-    const file = object.getAttribute("data") ||
+  for (const object of swfObjects) {
+
+    const swf =
+      object.getAttribute("data") ||
       object.querySelector('param[name="movie"]')?.value;
 
-    if (!file) continue;
+    if (!swf) continue;
 
     await loadFlash(
       object,
-      file,
-      object.style.width || object.getAttribute("width") || "100%",
-      object.style.height || object.getAttribute("height") || "100%"
+      swf,
+      object.style.width ||
+      object.getAttribute("width") ||
+      "100%",
+      object.style.height ||
+      object.getAttribute("height") ||
+      "100%"
     );
+
   }
 
-  const flashContainer = document.getElementById("flash-container");
+  const container = document.getElementById("flash-container");
 
-  if (flashContainer) {
-    await loadFlash(flashContainer, "usflash.swf", "100%", "100%");
+  if (container) {
+
+    await loadFlash(
+      container,
+      "oldnunight.swf",
+      "100%",
+      "100%"
+    );
+
   }
+
+  document.addEventListener("pointerdown", function() {
+
+    players.forEach(function(player) {
+
+      try {
+        player.ruffle().volume = 1;
+        player.play();
+      } catch (error) {
+        console.error(error);
+      }
+
+    });
+
+  }, { once: true, capture: true });
 
 });
 
+</script>
+
+<script>
+
 function resizeWorld() {
+
   const world = document.getElementById("world");
+
   if (!world) return;
 
   const scale = Math.min(1, window.innerWidth / 1200);
+
   world.style.transform = "scale(" + scale + ")";
-  world.style.marginBottom = (700 * (scale - 1)) + "px";
+
+  const height = world.offsetHeight;
+
+  world.style.marginBottom =
+    -(height * (1 - scale)) + "px";
+
 }
 
 window.addEventListener("resize", resizeWorld);
