@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +10,7 @@
 @keyframes utoniumGlow{0%{filter:drop-shadow(0 0 2px #acff00) drop-shadow(0 0 4px #80ff00) drop-shadow(0 0 8px #00ff00) drop-shadow(0 0 12px #008040)}100%{filter:drop-shadow(0 0 5px #acff00) drop-shadow(0 0 10px #80ff00) drop-shadow(0 0 18px #00ff00) drop-shadow(0 0 28px #008040)}}
 .uranium-pulse{font-family:'Technology',monospace;font-size:1.5rem;font-weight:bold;font-style:italic;color:#000000;letter-spacing:1px;white-space:nowrap;animation:utoniumGlow 1s ease-in-out infinite alternate}
 #layer13 img,#donate-button img{animation:utoniumGlow 1s ease-in-out infinite alternate;display:block}
+#layer29 span{animation:utoniumGlow 1s ease-in-out infinite alternate;display:inline-block}
 html,body{margin:0;padding:0;min-width:1200px;overflow-x:auto;height:100%}
 body{background:red;background-image:url("griddither.png");background-repeat:repeat;background-size:252px 252px;background-attachment:fixed}
 #world{position:relative;width:1200px;margin:0 auto;z-index:1}
@@ -39,9 +41,14 @@ ruffle-player,ruffle-player canvas{width:100%;height:100%;display:block;backgrou
 @keyframes weedFadeOut{0%{opacity:var(--fade-start-opacity)}100%{opacity:0}}
 .auto-style4{font-family:"VIDEO PIRATE";color:#00FF00;text-align:center}
 .auto-style5{color:#000000;background-color:#CBFF00}
-.auto-style6{color:#00FF00;text-align:center}
-.auto-style7{font-family:"BankGothic Md BT";font-size:x-large}
-.auto-style12{font-family:"BankGothic Md BT";font-size:x-large;color:#FF8FB0}
+.auto-style6{text-align:center}
+.auto-style7{font-family:Cyberspace;color:#CBFF00;font-size:x-large}
+.auto-style8{font-family:Cyberspace;color:#CBFF00;font-size:x-large;font-style:italic}
+.auto-style9{font-size:xx-large;font-family:"Snap ITC";color:#000000}
+.auto-style10{font-size:xx-large;font-family:CablegramUrgent;color:#000000}
+.auto-style11{font-size:xx-large;font-family:"Unsteady Oversteer";color:#000000}
+.auto-style12{font-size:x-large;font-family:"VIDEO PIRATE";color:#000000}
+.auto-style13{font-family:Cyberspace;color:#000000;font-size:x-large;font-style:italic}
 </style>
 <script>
 window.RufflePlayer=window.RufflePlayer||{};
@@ -88,13 +95,14 @@ try{await player.load({url:new URL("oldnunight.swf",document.baseURI).href})}cat
 </div>
 <div id="stage">
 <div id="layer28" style="position:absolute;width:233px;height:147px;z-index:106;left:-237px;top:41px">
-<div id="layer27" class="auto-style6" style="position:absolute;width:209px;height:103px;z-index:105;left:3px;top:16px">
-<span class="auto-style12">Grand Theft Auto VI:</span><br class="auto-style7">
-<span class="auto-style7">The show inside the game</span>
+<div id="layer29" class="auto-style6" style="position:absolute;width:208px;height:121px;z-index:1;left:7px;top:5px">
+<span class="auto-style13">Welcome to</span><br>
+<span class="auto-style9">Old</span><span class="auto-style10">N</span><span class="auto-style12">u</span><span class="auto-style11">NET</span><br>
+<span class="auto-style13">still under construction tho lmfao</span>
 </div>
 <img alt="" height="131" src="bubble.png" width="221">
 </div>
-<div id="layer24" class="auto-style4" style="position:absolute;width:167px;height:42px;z-index:108; left:194px;top:27px">
+<div id="layer24" class="auto-style4" style="position:absolute;width:167px;height:42px;z-index:108;left:194px;top:27px">
 If you can read this,<br>You're <span class="auto-style5">REAL</span> sneaky...
 </div>
 <div id="layer23" style="position:absolute;width:465px;height:35px;z-index:103;left:45px;top:535px">
@@ -265,17 +273,5 @@ updateWeedLeaves();
 setInterval(updateClock,250);
 setInterval(updateWeedLeaves,250);
 </script>
-<div id="layer29" style="position: absolute; width: 100px; height: 100px; z-index: 2; left: 566px; top: 718px">
-	<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>My Page</title>
-<script src="wimpy.js"></script>
-</head>
-<body>
-<div data-wimpyplayer data-skin="oldnunetplayer.tsv"></div>
-</body>
-</html></div>
 </body>
 </html>
